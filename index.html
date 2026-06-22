@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little World 💕</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="script.js" defer></script>
+</head>
+<body>
+
+<!-- ===== PASSWORD SCREEN ===== -->
+<div id="password-screen">
+  <div class="pw-stars" id="pw-stars"></div>
+  <div class="pw-card" id="pw-card">
+    <span class="pw-lock-icon">🔐</span>
+    <h1 class="pw-title">Enter Our Secret</h1>
+    <p class="pw-subtitle">This little world was made just for you 💕</p>
+    <div class="pw-input-wrap">
+      <input
+        type="password"
+        class="pw-input"
+        id="pw-input"
+        placeholder="Enter password..."
+        autocomplete="off"
+        onkeydown="if(event.key==='Enter') checkPassword()"
+      />
+      <button class="pw-toggle" onclick="togglePwVisibility()" id="pw-toggle">👁</button>
+    </div>
+    <button class="pw-btn" onclick="checkPassword()">Open My World 💫</button>
+    <p class="pw-error" id="pw-error"></p>
+    <p class="pw-hint">Hint: it might be something special <b>me</b> between <b>you</b> 💌</p>
+  </div>
+</div>
+
+<!-- ===== ZOOM OVERLAY ===== -->
+<div class="zoom-overlay" id="zoom-overlay" onclick="closeZoom()">
+  <img src="" id="zoom-img" alt="Zoomed photo" />
+</div>
+
+<!-- ===== MAIN CONTENT ===== -->
+<div id="main-content">
+
+  <!-- Background -->
+  <div class="cosmic-bg" id="cosmic-bg">
+    <div class="orb" style="width:500px;height:500px;background:#9c27b0;top:-100px;left:-150px;--od:14s;--tx:30px;--ty:50px;--sc:1.15"></div>
+    <div class="orb" style="width:400px;height:400px;background:#e91e63;bottom:-100px;right:-100px;--od:18s;--tx:-25px;--ty:-40px;--sc:1.1"></div>
+    <div class="orb" style="width:300px;height:300px;background:#673ab7;top:40%;left:60%;--od:11s;--tx:20px;--ty:25px;--sc:1.2"></div>
+  </div>
+
+  <!-- Floating hearts -->
+  <div class="hearts-layer" id="hearts-layer"></div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <a class="nav-logo" href="#">Our Little World Naincy 💕</a>
+    <button class="music-btn" id="music-btn" onclick="toggleMusic()">
+      <span class="music-note" id="music-note">♪</span>
+      <span id="music-label">Play Music</span>
+    </button>
+  </nav>
+
+  <!-- Hidden audio element -->
+  <audio id="bg-music" loop>
+    <!-- Add your mp3 URL here as: <source src="your-song.mp3" type="audio/mpeg"> -->
+    <!-- Using a royalty-free ambient music URL as placeholder -->
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="page-wrap">
+
+    <!-- HERO -->
+    <section class="hero">
+      <p class="hero-eyebrow">✦ Made just for you ✦</p>
+      <h1 class="hero-title">
+        You are my <em>beautiful</em><br>little world 🌸
+      </h1>
+      <p class="hero-quote">
+        "Some people make life beautiful just by being in it ✨<br>
+        You are that person, for me, every single day."
+      </p>
+
+      <!-- Hero Photo -->
+      <div class="hero-photo-wrap">
+        <div class="hero-photo-frame">
+          <div class="hero-photo-inner" onclick="openZoom(this)">
+            <!--
+              🌸 HERO PHOTO — Replace below:
+              Delete the .upload-placeholder div and add:
+              <img src="path/to/her-photo.jpg" alt="My beautiful girl" />
+            -->
+            <div class="upload-placeholder">
+              <span>🌸</span>
+              <img src="images\naincy.png" alt="Naincy" />
+              <span>Add her<br>photo here</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-cue">
+        <span>SCROLL</span>
+        <span class="scroll-arrow">↓</span>
+      </div>
+
+    </section>
+
+    <!-- POLAROID GALLERY -->
+    <section class="gallery-section reveal">
+      <div class="section-label">
+        <span class="section-eyebrow">✦ memories ✦</span>
+        <h2 class="section-title">Our <em>Beautiful</em> Moments</h2>
+      </div>
+
+      <div class="polaroid-grid" id="polaroid-grid">
+
+        <!-- POLAROID 1 — Replace emoji with: <img src="photo1.jpg" alt="..."> -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo1.jpeg" alt="Photo 2" />
+          </div>
+          <p class="polaroid-caption">My favourite smile 💕</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 2 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo2.jpeg" alt="Photo 2" />
+          </div>
+          <p class="polaroid-caption">Always glowing ✨</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 3 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo3.jpeg" alt="Photo 3" />
+          </div>
+          <p class="polaroid-caption">This day 🥰</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 4 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo4.jpeg" alt="Photo 4" />
+          </div>
+          <p class="polaroid-caption">Pure magic 🌙</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 5 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo5.jpeg" alt="Photo 5" />
+          </div>
+          <p class="polaroid-caption">You & sunshine ☀️</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 6 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo6.jpeg" alt="Photo 6" />
+          </div>
+          <p class="polaroid-caption">Forever this 💫</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+        <!-- POLAROID 7 -->
+        <div class="polaroid" onclick="openZoomFromPolaroid(this)">
+          <div class="polaroid-img">
+            <img src="images\photo7.jpeg" alt="Photo 7" />
+          </div>
+          <p class="polaroid-caption">Our special moments 🎉</p>
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- SLIDESHOW -->
+    <section class="slideshow-section reveal">
+      <div class="section-label">
+          <span class="polaroid-heart">💖</span>
+        </div>
+
+
+      </div>
+    </section>
+
+    <!-- SLIDESHOW -->
+    <section class="slideshow-section reveal">
+      <div class="section-label">
+        <span class="section-eyebrow">✦ our story ✦</span>
+        <h2 class="section-title">A <em>Beautiful</em> Story</h2>
+      </div>
+
+      <div class="slideshow-wrap">
+        <div class="slideshow-frame">
+          <!-- Add slides — replace emoji divs with <img> tags -->
+          <div class="slide active" id="slide-0">
+            <div style="text-align:center;color:rgba(255,255,255,0.4);font-family:'DM Sans';font-size:14px;padding:24px">
+              <img src="images\naincy.png" alt="Photo 1" />
+            </div>
+            <div class="slide-caption-bar">The beginning of us 🌸</div>
+          </div>
+
+          <div class="slide" id="slide-1">
+            <div style="text-align:center;color:rgba(255,255,255,0.4);font-family:'DM Sans';font-size:14px;padding:24px">
+              <img src="images\photo6.jpeg" alt="Photo 2" />
+            </div>
+            <div class="slide-caption-bar">Every moment with you ✨</div>
+          </div>
+
+          <div class="slide" id="slide-2">
+            <div style="text-align:center;color:rgba(255,255,255,0.4);font-family:'DM Sans';font-size:14px;padding:24px">
+              <img src="images\photo3.jpeg" alt="Photo 3" />
+            </div>
+            <div class="slide-caption-bar">You make me smile 💕</div>
+          </div>
+
+          <div class="slide" id="slide-3">
+            <div style="text-align:center;color:rgba(255,255,255,0.4);font-family:'DM Sans';font-size:14px;padding:24px">
+              <img src="images\photo4.jpeg" alt="Photo 4" />
+            </div>
+            <div class="slide-caption-bar">Always & forever 🌹</div>
+          </div>
+        </div>
+
+        <div class="slideshow-controls">
+          <button class="slide-btn" onclick="prevSlide()">‹</button>
+          <div class="slide-dots" id="slide-dots">
+            <div class="slide-dot active" onclick="goSlide(0)"></div>
+            <div class="slide-dot" onclick="goSlide(1)"></div>
+            <div class="slide-dot" onclick="goSlide(2)"></div>
+            <div class="slide-dot" onclick="goSlide(3)"></div>
+          </div>
+          <button class="slide-btn" onclick="nextSlide()">›</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOVE NOTES -->
+    <section class="notes-section reveal">
+      <div class="section-label">
+        <span class="section-eyebrow">✦ from the heart ✦</span>
+        <h2 class="section-title">Things I <em>Love</em> About You</h2>
+      </div>
+
+      <div class="notes-grid">
+        <div class="glass-card note-card">
+          <span class="note-icon">🌸</span>
+          <p class="note-text">"The way your eyes light up when you laugh — it's the most beautiful thing I've ever seen."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+        <div class="glass-card note-card">
+          <span class="note-icon">✨</span>
+          <p class="note-text">"You don't even try and yet you shine brighter than anyone in the room. Every single time."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+        <div class="glass-card note-card">
+          <span class="note-icon">💫</span>
+          <p class="note-text">"Your kindness, your warmth, your smile — you are a rare and wonderful kind of person."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+        <div class="glass-card note-card">
+          <span class="note-icon">🦋</span>
+          <p class="note-text">"With you, even ordinary days feel extraordinary. You make everything feel like magic."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+        <div class="glass-card note-card">
+          <span class="note-icon">🌙</span>
+          <p class="note-text">"I fall a little more in love with you every day, without even trying."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+        <div class="glass-card note-card">
+          <span class="note-icon">🌹</span>
+          <p class="note-text">"You are the calm in my chaos, the colour in my grey — my favourite everything."</p>
+          <span class="note-author">— Always yours</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECIAL MESSAGE -->
+    <section class="message-section reveal">
+      <div class="glass-card message-card">
+        <span class="message-quote-mark">"</span>
+        <p class="message-text">
+          To my <em>special one</em> — I made this little world for you,<br>
+          because no single word, no single moment, no single gift<br>
+          could ever be <em>enough</em> to show you what you mean to me.<br><br>
+          You are my home. You are my peace.<br>
+          You are the most beautiful part of <em>my story</em>. 🌸
+        </p>
+        <div class="message-sign">
+          With all my love 💕
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /page-wrap -->
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-text">Our Little World — made with 💕</p>
+    <p class="footer-hearts">🌸 💫 🌺 💕 ✨</p>
+  </footer>
+
+</div><!-- /main-content -->
+
+
+</body>
+</html>
