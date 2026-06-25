@@ -207,10 +207,31 @@ function toggleTheme() {
   }
 })();
 
-// ========== Back to Top Button ==========
 function scrollToTop() {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Show/hide on scroll
+window.addEventListener('scroll', () => {
+  const btn = document.querySelector('.back-to-top');
+  if (btn) btn.style.opacity = window.scrollY > 400 ? '1' : '0';
+});
+
+function openLightbox(imgSrc) {
+  const lb = document.getElementById('lightbox');
+  const content = document.getElementById('lightboxContent');
+  content.innerHTML = `<img src="${imgSrc}" alt="Photo" style="max-width:90vw;max-height:90vh;border-radius:12px;">`;
+  lb.style.display = 'flex';
+  lb.setAttribute('aria-hidden', 'false');
+}
+
+document.getElementById('lightboxClose')?.addEventListener('click', () => {
+  document.getElementById('lightbox').style.display = 'none';
+});
+
+function shareOnWhatsApp() {
+  const url = "https://naincykit.onrender.com";
+  const message = `💕 I made something special just for you...🌸\n\n${url}`;
+  const whatsappURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
+  window.open(whatsappURL, '_blank');
 }
