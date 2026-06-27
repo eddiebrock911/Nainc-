@@ -1,5 +1,5 @@
 /* ===== PASSWORD ===== */
-const CORRECT_PASSWORD = "naincy"; // 🔑 Change this password!
+const CORRECT_PASSWORD = "iloveyou"; // 🔑 Change this password!
 
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim().toLowerCase();
@@ -67,7 +67,7 @@ document.head.appendChild(styleEl);
 /* ===== FLOATING HEARTS ===== */
 function initHearts() {
   const layer = document.getElementById('hearts-layer');
-  const symbols = ['💕','💖','🌸','✨','💫','🌺','💗','🌷'];
+  const symbols = ['💕','💖','🌸','✨','💫','🌺','💗','🌷','😍'];
   for (let i = 0; i < 22; i++) {
     const h = document.createElement('div');
     h.className = 'heart-particle';
@@ -231,7 +231,82 @@ document.getElementById('lightboxClose')?.addEventListener('click', () => {
 
 function shareOnWhatsApp() {
   const url = "https://naincykit.onrender.com";
-  const message = `💕 I made something special just for you...🌸\n\n${url}`;
+  const message = `💕 I made something special just for you Naincy...🌸\n\n${url}`;
   const whatsappURL = `https://wa.me/?text=${encodeURIComponent(message)}`;
   window.open(whatsappURL, '_blank');
 }
+
+// ===== CURSOR HEARTS =====
+(function() {
+  const canvas = document.createElement('canvas');
+  canvas.style.cssText = 'position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9998;';
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COLORS = ['#e91e63','#f48fb1','#ce93d8','#f06292','#ff80ab','#ea80fc','#ff4081'];
+  let hearts = [];
+
+  function heartPath(ctx, x, y, size) {
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.bezierCurveTo(x, y-size*0.3, x-size*0.5, y-size*0.8, x-size*0.5, y-size*0.5);
+    ctx.bezierCurveTo(x-size*0.5, y-size*1.0, x, y-size*0.8, x, y-size*0.5);
+    ctx.bezierCurveTo(x, y-size*0.8, x+size*0.5, y-size*1.0, x+size*0.5, y-size*0.5);
+    ctx.bezierCurveTo(x+size*0.5, y-size*0.8, x, y-size*0.3, x, y);
+    ctx.closePath();
+  }
+
+  function spawnHeart(x, y) {
+    const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.2;
+    const speed = 0.8 + Math.random() * 1.8;
+    hearts.push({
+      x, y,
+      vx: Math.cos(angle) * speed * 0.4,
+      vy: Math.sin(angle) * speed,
+      size: 8 + Math.random() * 18,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      rot: (Math.random() - 0.5) * 0.4,
+      rotV: (Math.random() - 0.5) * 0.06,
+      life: 1,
+      decay: 0.012 + Math.random() * 0.01,
+    });
+  }
+
+  let lastSpawn = 0;
+  document.addEventListener('mousemove', (e) => {
+    const now = Date.now();
+    if (now - lastSpawn > 60) {
+      spawnHeart(e.clientX, e.clientY);
+      lastSpawn = now;
+    }
+  });
+
+  function loop() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = hearts.length - 1; i >= 0; i--) {
+      const h = hearts[i];
+      h.x += h.vx; h.y += h.vy;
+      h.vy -= 0.04; h.rot += h.rotV;
+      h.life -= h.decay;
+      if (h.life <= 0) { hearts.splice(i, 1); continue; }
+      ctx.save();
+      ctx.globalAlpha = h.life;
+      ctx.translate(h.x, h.y);
+      ctx.rotate(h.rot);
+      ctx.fillStyle = h.color;
+      heartPath(ctx, 0, 0, h.size);
+      ctx.fill();
+      ctx.restore();
+    }
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
