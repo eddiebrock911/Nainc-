@@ -1,5 +1,5 @@
 /* ===== PASSWORD ===== */
-const CORRECT_PASSWORD = "iloveyou"; // 🔑 Change this password!
+const CORRECT_PASSWORD = "naincy"; // 🔑 Change this password!
 
 function checkPassword() {
   const val = document.getElementById('pw-input').value.trim().toLowerCase();
@@ -310,3 +310,26 @@ function shareOnWhatsApp() {
   }
   requestAnimationFrame(loop);
 })();
+
+
+// ===== DAYS TOGETHER LIVE COUNTER =====
+const relationshipStart = new Date('2026-05-29T20:17:00+05:30');
+
+function updateTogetherCounter() {
+  const now = new Date();
+  let diff = now - relationshipStart;
+  if (diff < 0) diff = 0;
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const mins = Math.floor((diff / (1000 * 60)) % 60);
+  const secs = Math.floor((diff / 1000) % 60);
+
+  document.getElementById('c-days').textContent = days;
+  document.getElementById('c-hours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('c-mins').textContent = String(mins).padStart(2, '0');
+  document.getElementById('c-secs').textContent = String(secs).padStart(2, '0');
+}
+
+updateTogetherCounter();
+setInterval(updateTogetherCounter, 1000);
