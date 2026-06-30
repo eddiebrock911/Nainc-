@@ -20,7 +20,7 @@ const db = firebase.database();
 // Ask for name once, remember it on this device
 let myName = localStorage.getItem('chatName');
 if (!myName) {
-  myName = prompt("Tumhara naam likho (Ankit ya Naincy):") || "Guest";
+  myName = prompt("What is your (Ankit ya Naincy):") || "Guest";
   localStorage.setItem('chatName', myName);
 }
 
